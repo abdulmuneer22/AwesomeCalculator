@@ -12,8 +12,11 @@ import {
 
 class Button extends Component {
 
-  _onPressButton(value){
-    alert("Pressd " + value + " Dispatch Action For Displaying this value on screen ")
+  _onPressButton(){
+    var number = this.props.Textvalue
+    //alert(number)
+    this.props.myFunc(number)
+
   }
   render(){
     return(
@@ -42,5 +45,9 @@ const styles = StyleSheet.create({
   }
 });
 
+
+Button.propTypes = {
+  myFunc: React.PropTypes.func,
+};
 
 export default Button

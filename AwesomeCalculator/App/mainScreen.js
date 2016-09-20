@@ -25,6 +25,21 @@ class MainScreen extends Component {
   }
 
 
+  handleChildFunc(number){
+    //alert(number)
+    if(this.state.CalculatorDisplayValue > 0){
+      var oldValue = this.state.CalculatorDisplayValue
+
+      var newValue = oldValue * 10  + Number(number)
+      //alert(newValue)
+
+      this.setState({CalculatorDisplayValue : newValue})
+
+
+    }else{
+    this.setState({CalculatorDisplayValue : number})
+    }
+}
 
 
 
@@ -45,26 +60,26 @@ class MainScreen extends Component {
 
             <View style={{flexDirection : 'column',flex : 4}}>
             <View style={styles.CalculatorNumericButtonsWrapper}>
-            <Button Textvalue="7" operantValue={1} {...this.props}/>
-            <Button Textvalue="8" operantValue={2}  {...this.props} />
-            <Button Textvalue="9"  operantValue={3} {...this.props} />
+            <Button Textvalue="7" operantValue={1} myFunc={this.handleChildFunc.bind(this)} {...this.props}/>
+            <Button Textvalue="8" operantValue={2} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="9"  operantValue={3} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
             </View>
             <View style={styles.CalculatorNumericButtonsWrapper}>
-            <Button Textvalue="4" operantValue={1} {...this.props} />
-            <Button Textvalue="5" operantValue={2}  {...this.props} />
-            <Button Textvalue="6"  operantValue={3} {...this.props} />
-            </View>
-
-            <View style={styles.CalculatorNumericButtonsWrapper}>
-            <Button Textvalue="1" operantValue={1} {...this.props} />
-            <Button Textvalue="2" operantValue={2}  {...this.props} />
-            <Button Textvalue="3"  operantValue={3} {...this.props} />
+            <Button Textvalue="4" operantValue={1} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="5" operantValue={2}  myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="6"  operantValue={3} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
             </View>
 
             <View style={styles.CalculatorNumericButtonsWrapper}>
-            <Button Textvalue="." operantValue={1} {...this.props} />
-            <Button Textvalue="0" operantValue={2}  {...this.props} />
-            <Button Textvalue="="  operantValue={3} {...this.props} />
+            <Button Textvalue="1" operantValue={1} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="2" operantValue={2}  myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="3"  operantValue={3} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            </View>
+
+            <View style={styles.CalculatorNumericButtonsWrapper}>
+            <Button Textvalue="." operantValue={1} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="0" operantValue={2}  myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="="  operantValue={3} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
             </View>
 
 
