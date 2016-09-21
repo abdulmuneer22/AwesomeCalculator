@@ -4,6 +4,8 @@
  * @flow
  */
 
+// test
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
