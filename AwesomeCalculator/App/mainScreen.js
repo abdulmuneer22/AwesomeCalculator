@@ -19,26 +19,195 @@ class MainScreen extends Component {
 
   constructor(){
     super();
+    
     this.state={
-      CalculatorDisplayValue : '0'
+      CalculatorDisplayValue : '0',
+      a : '',
+      b : ''
     }
+
+    
   }
 
 
-  handleChildFunc(number){
-    //alert(number)
-    if(this.state.CalculatorDisplayValue > 0){
-      var oldValue = this.state.CalculatorDisplayValue
+  handleChildFunc(input){
+    
 
-      var newValue = oldValue * 10  + Number(number)
-      //alert(newValue)
+    switch(input){
+      case 'DEL':{
+      this.setState({CalculatorDisplayValue : 0})
+      break;
+      }
 
-      this.setState({CalculatorDisplayValue : newValue})
+      case '=':{
+        
 
 
-    }else{
-    this.setState({CalculatorDisplayValue : number})
+        // Search for the operator 
+          // displayValue => Current value in  Display
+          var displayValue = this.state.CalculatorDisplayValue 
+          
+          try{
+          if(displayValue.indexOf('+') > 0){var op = '+'}
+          }catch(error){
+            //alert(error)
+            this.setState({CalculatorDisplayValue : '0'})
+          }
+
+          try{
+          if(displayValue.indexOf('-') > 0){var op = '-'}
+          }catch(error){
+            //alert(error)
+            this.setState({CalculatorDisplayValue : '0'})
+          }
+
+          try{
+          if(displayValue.indexOf('x') > 0){var op = 'x'}
+          }catch(error){
+            //alert(error)
+            this.setState({CalculatorDisplayValue : '0'})
+        }
+
+          try{
+          if(displayValue.indexOf('÷') > 0){var op = '÷'}
+          }catch(error){
+            //alert(error)
+            this.setState({CalculatorDisplayValue : '0'})
+          }
+
+          
+          
+          
+
+         
+          
+          
+            
+          
+
+        //alert("=")
+        var a = ''
+        var b = ''
+        
+        try{
+        var displayValueFields = displayValue.split(op)
+        var a = displayValueFields[0]
+        var b = displayValueFields[1]
+        }catch(error){
+          this.setState({CalculatorDisplayValue : '0'})
+          //alert(error)
+        }
+        switch(op){
+          case '+':
+          var a = Number(a)
+          var b = Number(b)
+          var result = a + b
+          break;
+
+          case '-':
+          var a = Number(a)
+          var b = Number(b)
+          var result = a - b
+          break;
+
+          case 'x':
+          var a = Number(a)
+          var b = Number(b)
+          var result = a * b
+          break;
+
+          case '÷':
+          var a = Number(a)
+          var b = Number(b)
+          var result = a / b
+          break;
+            
+        }
+
+        //alert(result)
+        this.setState({CalculatorDisplayValue : result})
+        
+        break;
+      }
+
+      default : {
+                  this.setState({CalculatorDisplayValue : input})
+                  var OldValue = this.state.CalculatorDisplayValue
+
+
+                  if(OldValue != 0 && OldValue !=undefined){
+                  var Input = input
+                  var ValueOnDisplay = OldValue + "" + Input
+                  //alert(ValueOnDisplay)      
+                  this.setState({CalculatorDisplayValue : ValueOnDisplay})
+
+                  }
+      }
+
     }
+    
+
+  }
+
+
+  _handleChildFunc(input){
+    
+    switch(input){
+      case '.':
+        //alert("Pressed .")
+        var oldValue = this.state.CalculatorDisplayValue
+        var newValue = oldValue + input
+        this.setState({CalculatorDisplayValue : newValue})
+        break;
+        
+      case '=':
+        var _b = this.state.CalculatorDisplayValue
+        this.setState({b:_b})
+        var _a = Number(this.state.a)
+        var _b = Number(this.state.b)
+        var answer = _a+_b
+        this.setState({CalculatorDisplayValue : answer})
+        //alert(_a + " " +_b)
+        
+        break;
+
+      case '+':
+
+        var _a = this.state.CalculatorDisplayValue
+        this.setState({a:_a})
+
+        this.setState({CalculatorDisplayValue : ''})
+        break;
+
+      case 'DEL':
+        this.setState({
+          CalculatorDisplayValue : 0,
+          a: 0,
+          b : 0
+        })
+        break;
+
+
+      
+      default : 
+                if(this.state.CalculatorDisplayValue > 0){
+                var oldValue = this.state.CalculatorDisplayValue
+
+                var newValue = oldValue.append+newValue
+                //alert(newValue)
+
+                this.setState({CalculatorDisplayValue : newValue})
+
+
+                }else{
+                this.setState({CalculatorDisplayValue : input})
+                }
+    }    
+    
+    
+    
+
+    
 }
 
 
@@ -54,6 +223,7 @@ class MainScreen extends Component {
               marginTop : 60,
               textAlign : 'right'
             }}>{this.state.CalculatorDisplayValue}</Text>
+            <Text>{this.state.a}</Text>
           </View>
           <View style={styles.CalculatorButtonsWrapper}>
 
@@ -77,9 +247,10 @@ class MainScreen extends Component {
             </View>
 
             <View style={styles.CalculatorNumericButtonsWrapper}>
-            <Button Textvalue="." operantValue={1} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
-            <Button Textvalue="0" operantValue={2}  myFunc={this.handleChildFunc.bind(this)} {...this.props} />
-            <Button Textvalue="="  operantValue={3} myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="."   myFunc={this.handleChildFunc.bind(this)} {...this.props} />            
+            <Button Textvalue="0"   myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="="   myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            
             </View>
 
 
@@ -91,11 +262,11 @@ class MainScreen extends Component {
 
 
           <View style={styles.CalculatorOperationsButtonsWrapper}>
-            <Button Textvalue="DEL"  operantValue={3} {...this.props} />
-            <Button Textvalue="/"  operantValue={3} {...this.props} />
-            <Button Textvalue="x"  operantValue={3} {...this.props} />
-            <Button Textvalue="-"  operantValue={3} {...this.props} />
-            <Button Textvalue="+"  operantValue={3} {...this.props} />
+            <Button Textvalue="DEL" myFunc={this.handleChildFunc.bind(this)}{...this.props} />
+            <Button Textvalue="÷"   myFunc={this.handleChildFunc.bind(this)}{...this.props} />
+            <Button Textvalue="x"   myFunc={this.handleChildFunc.bind(this)}{...this.props} />
+            <Button Textvalue="-"   myFunc={this.handleChildFunc.bind(this)} {...this.props} />
+            <Button Textvalue="+"   myFunc={this.handleChildFunc.bind(this)}{...this.props} />
 
             </View>
           </View>
@@ -115,12 +286,13 @@ const styles = StyleSheet.create({
     flexDirection : 'column',
     backgroundColor : 'green',
     height : window.height-10,
-    margin : 5
+    //margin : 5
 
   },
   CalculatorDisplay : {
     flex : 1,
-    backgroundColor :'white'
+    backgroundColor :'white',
+    padding : 10
   },
   CalculatorButtonsWrapper : {
     flex : 2,
@@ -145,7 +317,7 @@ const styles = StyleSheet.create({
   },
   CalculatorOperationsButtonsWrapper:{
     flex : 1,
-    backgroundColor : '#757575',
+    backgroundColor : '#636363',
     padding : 10,
     alignItems : "stretch"
   }

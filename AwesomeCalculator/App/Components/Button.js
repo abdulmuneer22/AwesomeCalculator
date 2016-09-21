@@ -13,9 +13,9 @@ import {
 class Button extends Component {
 
   _onPressButton(){
-    var number = this.props.Textvalue
+    var input = this.props.Textvalue
     //alert(number)
-    this.props.myFunc(number)
+    this.props.myFunc(input)
 
   }
   render(){
