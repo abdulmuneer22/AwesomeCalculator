@@ -33,5 +33,7 @@ eg :
      
 ToDo's :
 1 . Extend functionalities to manage multiple operants : eg 22+4x34/4
+
 2 . Introduce '(' and ')' operators 
+
 3 . Introduce unary operation = > 22+ , 12+ , 12x , 12/ etc 
